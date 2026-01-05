@@ -4,7 +4,7 @@ set -euo pipefail
 APP_DIR="/home/azureuser/zammad"
 
 mkdir -p "$APP_DIR"
-cp docker-compose.yml "$APP_DIR/docker-compose.yaml"
+cp docker-compose.yaml "$APP_DIR/docker-compose.yaml"
 
 chown -R azureuser:azureuser "$APP_DIR"
 
