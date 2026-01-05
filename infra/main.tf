@@ -183,10 +183,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
     sku       = "22_04-lts"
     version   = "latest"
   }
-  lifecycle {
-    prevent_destroy = true
-    ignore_changes = [ custom_data ]
-  }
+#   lifecycle {
+#     prevent_destroy = true
+#     ignore_changes = [ custom_data ]
+#   }
 }
 resource "azurerm_virtual_machine_extension" "deploy_zammad" {
   name               = "deploy-zammad"
@@ -202,7 +202,7 @@ resource "azurerm_virtual_machine_extension" "deploy_zammad" {
   protected_settings = jsonencode({
     fileUris = [
       "https://raw.githubusercontent.com/sidschow1972/Zamanda-POC/main/docker/bootstrap.sh",
-      "https://raw.githubusercontent.com/sidschow1972/Zamanda-POC/main/docker/docker-compose.yml"
+      "https://raw.githubusercontent.com/sidschow1972/Zamanda-POC/main/docker/docker-compose.yaml"
     ]
   })
 }
