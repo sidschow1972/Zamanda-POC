@@ -156,7 +156,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                = "vm-${var.prefix}-01"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  size                = "Standard_D2S_v3"
+  size                = "Standard_D2s_v3"
   admin_username      = var.admin_username
   admin_password      = var.admin_password
   network_interface_ids = [
