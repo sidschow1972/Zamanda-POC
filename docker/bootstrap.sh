@@ -1,15 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="/home/azureuser/zammad"
+ADMIN_USER="azureuser"
+APP_DIR="/home/${ADMIN_USER}/zammad"
 
-mkdir -p "$APP_DIR"
-cp docker-compose.yaml "$APP_DIR/docker-compose.yaml"
+echo "[bootstrap] Prepare ${APP_DIR}"
+mkdir -p "${APP_DIR}"
 
-chown -R azureuser:azureuser "$APP_DIR"
+echo "[bootstrap] Copy compose files"
+cp -f docker-compose.yml "${APP_DIR}/docker-compose.yml"
+if [ -f ".env" ]; then
+  cp -f .env "${APP_DIR}/.env"
+fi
 
-sudo -u azureuser bash -lc "
-  cd $APP_DIR
-  docker compose pull
-  docker compose up -d
+chown -R "${ADMIN_USER}:${ADMIN_USER}" "${APP_DIR}"
+
+echo "[bootstrap] Bring stack up"
+sudo -u "${ADMIN_USER}" bash -lc "
+  cd '${APP_DIR}'
+  docker compose -f docker-compose.yml up -d
+  docker compose -f docker-compose.yml ps
 "
+
+echo "[bootstrap] Done"

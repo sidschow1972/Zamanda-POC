@@ -20,6 +20,13 @@ write_files:
             - "80:8080"
           environment:
             - ZAMMAD_RAILS_PORT=8080
+            - POSTGRESQL_HOST=postgres
+            - POSTGRESQL_PORT=5432
+            - POSTGRESQL_USER=zammad
+            - POSTGRESQL_PASS=zammadChangeMeNow
+            - POSTGRESQL_DB=zammad_production
+            - ELASTICSEARCH_HOST=elasticsearch
+            - ELASTICSEARCH_PORT=9200
           volumes:
             - zammad-data:/opt/zammad
           depends_on:
@@ -68,4 +75,5 @@ runcmd:
   # bring up zammad automatically
   - mkdir -p /home/azureuser/zammad
   - chown -R azureuser:azureuser /home/azureuser/zammad
-  - sudo -u azureuser sh -lc 'cd /home/azureuser/zammad && docker compose up -d'
+  - sudo -u azureuser sh -lc 'cd /home/azureuser/zammad && docker compose -f docker-compose.yml up -d'
+

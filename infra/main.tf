@@ -202,7 +202,7 @@ resource "azurerm_virtual_machine_extension" "deploy_zammad" {
   protected_settings = jsonencode({
     fileUris = [
       "https://raw.githubusercontent.com/sidschow1972/Zamanda-POC/main/docker/bootstrap.sh",
-      "https://raw.githubusercontent.com/sidschow1972/Zamanda-POC/main/docker/docker-compose.yaml"
+      "https://raw.githubusercontent.com/sidschow1972/Zamanda-POC/main/docker/docker-compose.yml"
     ]
   })
 }
